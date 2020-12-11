@@ -1,6 +1,6 @@
 name: CI
 
-on: 
+on:
   push:
     branches-ignore: 'release-**'
     tags-ignore: '**'
@@ -22,7 +22,7 @@ jobs:
         id: engines
         run: |
           echo "::set-output name=NODE_VERSION::$(jq -r '.engines.node' package.json)"
-          
+
 
   tests:
     runs-on: ubuntu-latest
@@ -63,18 +63,17 @@ jobs:
        - uses: GoogleCloudPlatform/release-please-action@v2
          with:
            token: ${{ secrets.GH_ACTION_TOKEN }}
-           command: release-pr
            release-type: node
-     
-  release-please2:
-    if: "contains(github.event.head_commit.message, 'rudywaltz/release')"
-    needs:
-      - init
-    runs-on: ubuntu-latest
-    steps:
-       - uses: GoogleCloudPlatform/release-please-action@v2
-         with:
-           token: ${{ secrets.GH_ACTION_TOKEN }}
-           command: github-release
-           release-type: node
+           package-name: qqq
 
+  # release-please2:
+  #   if: "contains(github.event.head_commit.message, 'rudywaltz/release')"
+  #   needs:
+  #     - init
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #      - uses: GoogleCloudPlatform/release-please-action@v2
+  #        with:
+  #          token: ${{ secrets.GH_ACTION_TOKEN }}
+  #          command: github-release
+  #          release-type: node
