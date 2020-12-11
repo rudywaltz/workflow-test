@@ -1,0 +1,42 @@
+name: release-tag
+
+on:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+        
+env:
+  CI_REPO_NAME: ${{ github.repository }}
+  CI_COMMIT_ID: ${{ github.sha }}
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      NODE_VERSION: ${{steps.engines.outputs.NODE_VERSION}}
+      TAG_VERSION: ${{steps.engines.outputs.TAG_VERSION}}
+      CACHE_KEY: ${{steps.cache.outputs.CACHE_KEY}}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Node version
+        id: engines
+        run: |
+          echo "::set-output name=NODE_VERSION::$(jq -r '.engines.node' package.json)"
+          
+
+  deploy-prod:
+    needs:
+      - init
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ needs.init.outputs.NODE_VERSION }}"
+      - name: Install Packages
+        run: |
+          npm ci
+      - name: Deploy
+        run: npm run deploy
+        

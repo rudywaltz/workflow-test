@@ -1,0 +1,80 @@
+name: CI
+
+on: 
+  push:
+    branches-ignore: 'release-**'
+    tags-ignore: '**'
+
+env:
+  CI_REPO_NAME: ${{ github.repository }}
+  CI_COMMIT_ID: ${{ github.sha }}
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      NODE_VERSION: ${{steps.engines.outputs.NODE_VERSION}}
+      CACHE_KEY: ${{steps.cache.outputs.CACHE_KEY}}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Node version
+        id: engines
+        run: |
+          echo "::set-output name=NODE_VERSION::$(jq -r '.engines.node' package.json)"
+          
+
+  tests:
+    runs-on: ubuntu-latest
+    needs:
+      - init
+    strategy:
+      matrix:
+        script: [ 'test' ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ needs.init.outputs.NODE_VERSION }}"
+      - name: Install Packages
+        run: |
+          npm ci
+      - name: Run unit ${{ matrix.script }}
+        run: npm run ${{ matrix.script }}
+
+  deploy-staging:
+    if: "!contains(github.event.head_commit.message, 'rudywaltz/release') || !contains(github.event.head_commit.message,'chore: release')"
+    needs:
+      - init
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "stage build"
+
+  release-please:
+    if: "!contains(github.event.head_commit.message, 'rudywaltz/release') || !contains(github.event.head_commit.message,'chore: release')"
+    needs:
+      - init
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+       - uses: GoogleCloudPlatform/release-please-action@v2
+         with:
+           token: ${{ secrets.GH_ACTION_TOKEN }}
+           command: release-pr
+           release-type: node
+     
+  release-please2:
+    if: "contains(github.event.head_commit.message, 'rudywaltz/release')"
+    needs:
+      - init
+    runs-on: ubuntu-latest
+    steps:
+       - uses: GoogleCloudPlatform/release-please-action@v2
+         with:
+           token: ${{ secrets.GH_ACTION_TOKEN }}
+           command: github-release
+           release-type: node
+
