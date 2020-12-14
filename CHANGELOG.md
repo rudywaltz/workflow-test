@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.1.0...v1.2.0) (2020-12-14)
+
+
+### Features
+
+* test workflow ([d5b5681](https://www.github.com/rudywaltz/workflow-test/commit/d5b56818cfcdae293e80f6b4c4cc9880a449d70f))
+
+
+### Bug Fixes
+
+* **release-please:** rollback version ([61e05b8](https://www.github.com/rudywaltz/workflow-test/commit/61e05b877f58742a592511259787cc1ba79fc8c2))
+
 ## [1.1.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.0.0...v1.1.0) (2020-12-11)
 
 
