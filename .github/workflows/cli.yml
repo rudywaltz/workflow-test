@@ -60,7 +60,7 @@ jobs:
       - tests
     runs-on: ubuntu-latest
     steps:
-       - uses: GoogleCloudPlatform/release-please-action@v2.12.1
+       - uses: GoogleCloudPlatform/release-please-action@v2.12.2
          with:
            token: ${{ secrets.GH_ACTION_TOKEN }}
            release-type: node
