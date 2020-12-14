@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.2.0...v1.3.0) (2020-12-14)
+
+
+### Features
+
+* **release-please:** using 2.12.0 ([cc5a5bc](https://www.github.com/rudywaltz/workflow-test/commit/cc5a5bcc7332544f3a0bb174ab43787b6e0ca30b))
+
 ## [1.2.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.1.0...v1.2.0) (2020-12-14)
 
 
