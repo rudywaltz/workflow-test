@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.4.0...v1.5.0) (2021-03-01)
+
+
+### Features
+
+* move to private ([60ee045](https://www.github.com/rudywaltz/workflow-test/commit/60ee0455e2a3ee8677e86719068cac66b4ce5ba6))
+* **release-please:** using 2.12.2 ([22498b2](https://www.github.com/rudywaltz/workflow-test/commit/22498b29995bfcb8a6d874338fcbcd5342e352c4))
+* use 2.17.0 ([7abd0ae](https://www.github.com/rudywaltz/workflow-test/commit/7abd0aee87b05b66b2e1ffcac6282691479dd638))
+* use latest ([2c04878](https://www.github.com/rudywaltz/workflow-test/commit/2c0487800dd98a17b84042a0cdab88ae143b2c03))
+
+
+### Bug Fixes
+
+* debug ([01e9bba](https://www.github.com/rudywaltz/workflow-test/commit/01e9bba024c6aecd517b0caf7fab98768eb1ed28))
+* rollback ([ecbccc2](https://www.github.com/rudywaltz/workflow-test/commit/ecbccc2ff79c5334d9f5a4f881245fc1428535bd))
+
 ## [1.4.0](https://www.github.com/rudywaltz/workflow-test/compare/v1.3.0...v1.4.0) (2020-12-14)
 
 
